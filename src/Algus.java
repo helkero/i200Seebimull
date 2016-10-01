@@ -3,6 +3,9 @@
  */
 public class Algus {
     public static void main (String[] args) {
+
         System.out.println("Ahoi");
+        System.out.println("Mina olen Kerli");
+
     }
 }
