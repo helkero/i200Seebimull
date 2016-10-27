@@ -36,9 +36,12 @@ public class Algus extends Application {
 
         new AnimationTimer() {
             public void handle(long currentNanoTime){
+                double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+                double y = 605 - (t*100);
+
                 //Puhasta mängupind, et vanu kaadreid mitte näha (mullil tekkis kontuur)
                 kontekst.clearRect(0,0,PINNA_LAIUS,PINNA_KORGUS);
-                kontekst.drawImage(seebiMull, 250, 250);
+                kontekst.drawImage(seebiMull, 250, y);
             }
         }.start();
         suurAken.show();
