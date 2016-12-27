@@ -15,7 +15,12 @@ public class Seebimull {
     public Seebimull(int x, int y, int size, int speed, Image pilt, GraphicsContext joonistus){
         this.algusX = x;
         this.algusY = y;
-        this.suurus = size;
+        if (size < 60){
+            this.suurus = 40;
+        }
+        else {
+            this.suurus = size;
+        }
         this.kiirus = speed;
         this.mulliPilt = pilt;
         this.joonistusKontekst = joonistus;
@@ -24,7 +29,7 @@ public class Seebimull {
     }
 
     public void JoonistaMull(){
-        this.joonistusKontekst.drawImage(this.mulliPilt, this.algusX, this.algusY);
+        this.joonistusKontekst.drawImage(this.mulliPilt, this.algusX, this.algusY, this.suurus, this.suurus);
     }
 
     public void ArvutaUusAsukoht(){

@@ -15,13 +15,13 @@ public class Algus extends Application {
         launch(args);
     }
 
-    final int PINNA_LAIUS = 600;
-    final int PINNA_KORGUS = 600;
+    final int PINNA_LAIUS = 800;
+    final int PINNA_KORGUS = 800;
 
     public void start(Stage suurAken) {
         suurAken.setTitle("Seebimull");
 
-        Group root = new Group();
+        Group root = new Group(); //Grupi vajalikkust ei tea. Sinna hakkab kuuluma peaStseen.
         Scene peaStseen = new Scene(root);
         suurAken.setScene(peaStseen);
 
@@ -30,8 +30,8 @@ public class Algus extends Application {
 
         GraphicsContext joonistus = manguPind.getGraphicsContext2D();
 
-        Image seebiMull = new Image("bubble.png");
-        Seebimull mull1 = new Seebimull(100,100, 2, 5, seebiMull, joonistus);
+        Image mulliPilt = new Image("bubble.png");
+        Kontroller manguKontroller = new Kontroller(joonistus, mulliPilt);
 
         final long startNanoTime = System.nanoTime();
 
@@ -42,9 +42,9 @@ public class Algus extends Application {
                 double y = 605 - (t * 100);
                 //Puhasta mängupind, et vanu kaadreid mitte näha (mullil tekkis kontuur)
                 joonistus.clearRect(0, 0, PINNA_LAIUS, PINNA_KORGUS);
-
-                mull1.ArvutaUusAsukoht();
-                mull1.JoonistaMull();
+                manguKontroller.TekitaMull();
+                manguKontroller.ArvutaMullideUusAsukoht();
+                manguKontroller.JoonistaMullid();
             }
         }.start();
         suurAken.show();
