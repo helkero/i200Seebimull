@@ -11,8 +11,8 @@ import javafx.stage.Stage;
  * Created by kho on 26.09.2016.
  */
 public class Algus extends Application {
-    public static void main (String[] args) {
-       launch(args);
+    public static void main(String[] args) {
+        launch(args);
     }
 
     final int PINNA_LAIUS = 600;
@@ -22,26 +22,29 @@ public class Algus extends Application {
         suurAken.setTitle("Seebimull");
 
         Group root = new Group();
-        Scene peaStseen = new Scene( root );
-        suurAken.setScene( peaStseen );
+        Scene peaStseen = new Scene(root);
+        suurAken.setScene(peaStseen);
 
-        Canvas manguPind = new Canvas( PINNA_LAIUS, PINNA_KORGUS);
-        root.getChildren().add( manguPind);
+        Canvas manguPind = new Canvas(PINNA_LAIUS, PINNA_KORGUS);
+        root.getChildren().add(manguPind);
 
-        GraphicsContext kontekst = manguPind.getGraphicsContext2D();
+        GraphicsContext joonistus = manguPind.getGraphicsContext2D();
 
         Image seebiMull = new Image("bubble.png");
+        Seebimull mull1 = new Seebimull(100,100, 2, 5, seebiMull, joonistus);
 
         final long startNanoTime = System.nanoTime();
 
         new AnimationTimer() {
-            public void handle(long currentNanoTime){
-                double t = (currentNanoTime - startNanoTime) / 1000000000.0;
-                double y = 605 - (t*100);
+            public void handle(long currentNanoTime) {
 
+                double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+                double y = 605 - (t * 100);
                 //Puhasta mängupind, et vanu kaadreid mitte näha (mullil tekkis kontuur)
-                kontekst.clearRect(0,0,PINNA_LAIUS,PINNA_KORGUS);
-                kontekst.drawImage(seebiMull, 250, y);
+                joonistus.clearRect(0, 0, PINNA_LAIUS, PINNA_KORGUS);
+
+                mull1.ArvutaUusAsukoht();
+                mull1.JoonistaMull();
             }
         }.start();
         suurAken.show();
